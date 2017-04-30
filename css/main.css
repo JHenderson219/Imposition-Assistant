@@ -1,0 +1,49 @@
+body{
+	font-family: 'open-sans', sans-serif;
+}
+
+.container{
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	align-self: center;
+	width: 80%;
+	margin: auto;
+}
+
+.input-div{
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+.output-div{
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+
+form {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	margin: 10px;
+}
+textarea{
+	width: 80%;
+	margin: 10px;
+}
+
+.title{
+	display: flex;
+}
+
+#duplex-box{
+	margin: 10px;
+}
+
+#calculate{
+	margin: 10px;
+}
