@@ -1,4 +1,4 @@
-function clearInputs(){
+/*function clearInputs(){
 	$("#input-area").val("");
 }
 
@@ -19,13 +19,10 @@ $("#calculate").on("click", function (){
 	let piecesPerSheet = $("#pieces-per-sheet").attr("value");
 	let input = $("#input-area").val();
 	let duplex = $("#duplex-box").prop("checked"); 
-	console.log(piecesPerSheet);
-	console.log(input.split("\n"));
-	console.log(duplex);
 });
+*/
 
-
-var input;
+var input = "100\n100\n250\n100\n500\n100";
 var up;
 var duplex;
 
@@ -55,7 +52,7 @@ function impose(pageArr, up, duplex, arr){
 	sq = pageArr[0].qty;
 	
 	for(let i = 1; i < len;i++){
-		pageArr[i].qty < sq ? pageArr[i].qty = sq; 				//Find smallest quantity.
+		pageArr[i].qty < sq ? sq = pageArr[i].qty : sq = sq ;				//Find smallest quantity.
 	}
 	
 	for(let i = 1; i < len;i++){
@@ -78,18 +75,18 @@ function impose(pageArr, up, duplex, arr){
 
 	}
 			
-	}
+	
 
 
 	return shuffleRules;
 }
 
 function factorize(num){
-	let factors = [];
+	let factors = [0];
 	let j = 1;
-	factors[0] = 0;
 	for(let i = 0;i < num;i++){
-		if((num/i)%num == 0){
+		console.log(24%4);
+		if(num%i == 0){
 			factors[j] = i;
 			j++;
 		}
