@@ -22,7 +22,7 @@ $("#calculate").on("click", function (){
 });
 */
 
-var input = "240\n480\n240\n240\n240\n360";
+const input = "100\n100\n100\n100\n100\n100";
 var up;
 var duplex;
 
@@ -40,53 +40,71 @@ function populatePages(arr){
 	for(let i = 0;i<len;i++){
 		pageArr[i] = new Page(i,arr[i]);
 	}
-	return pageArr;
+	return pageArr.sort((a,b) => a.qty > b.qty );
 }
 
-function impose(pageArr, up, duplex, arr){
+
+//console.log("Populate pages 0 is: "+populatePages(inputArr)[0].qty);
+//console.log (impose(populatePages(inputArr), 24, false, [] ));
+
+//console.log(240%12);
+
+function imposeTest(pageArr, up, duplex){
 	let len = pageArr.length;
 	let sq = 0;
 	let qsq = 0;
 	let factorIndex = 0;
-	let shuffleRules = "";
+	let shuffleRulesString; //IS A STRING
 	let factors;
 	let currentFactor;
+	let upPerPage;
+	let shuffleRules = [];
+
+	factors = factorize(up); 
+
 	sq = pageArr[0].qty;
-	for(let i = 0; i < len;i++){
+	for(let i = 1; i < len;i++){
 		if (pageArr[i].qty < sq)
 		sq = pageArr[i].qty;									//Find smallest quantity.
 	}
 	
+
 	for(let i = 0; i < len;i++){
 		if(pageArr[i].qty == sq) 								//Find quantity of smallest quantity.
 			qsq++;
 	}
 
-	factors = factorize(up); 									//Assign factors of 'up' as a string to factors.
-	console.log("qsq is: "+qsq);
-	console.log("sq is: "+sq);
-	console.log ("factors array is: "+factors);
-	console.log ("up % qsq is: "+(up%qsq));
-	console.log ("up divided by qsq is: "+(up/qsq));
-	for(let i = 0; i < factors.length; i++){ 
-		if(factors[i] == (up/qsq)) 								//Find factor in factor array.
-			factorIndex = i;
-	}
-	console.log("factor index is: "+factorIndex);
-	console.log ("factor is: "+factors[factorIndex]);
-	if(factorIndex = 0){										//If up is not a factor
-		//Go do something else
-	}
-
-	for (let i=0; i<len; i++){
-		if (pageArr[i].qty != sq){
-			if ((qsq/(up-(factors[factorIndex]*qsq)))==(sq/ pageArr[i].qty)) {
-
+	for(let l = qsq; l > 0; l--){
+		for (let k=0; k<factors.length; k++){
+				if ((up/qsq)==factors[k]){																		//If our quantity of smallest quantity goes on the page evenly...
+					upPerPage = up/qsq;																			//Set our up number to up/sqs
+					console.log(upPerPage);
+					for(let i = 0; i<pageArr.length; i++){														//If we're still in the page array...
+						if (pageArr[0].qty==sq){																//If first element is still the smallest quantity...
+							let pageNumber = (pageArr.shift().index)+1;											//Assign original page number of first element and shift.
+							
+							for (let j = 0; j<upPerPage; j++){													//Loop "upPerPage" times to generate shuffle rules for the page.
+								shuffleRulesString = generateSuffleRules(pageNumber,duplex,shuffleRules);		//Create shuffle rule for one page.
+							
+							}
+						}
+					}
+				}
 			}
 		}
+
+	return shuffleRulesString;
+}
+
+function generateSuffleRules(index,duplex,shuffleRules){
+	if (duplex){
+		shuffleRules.push((2*index)-1);
+		shuffleRules.push(2*index);
+	} else {
+		shuffleRules.push(index);
 	}
 
-	return shuffleRules;
+	return shuffleRules.join(" ");
 }
 
 function factorize(num){
@@ -100,7 +118,5 @@ function factorize(num){
 	}
 	return factors;
 }
-console.log("Populate pages 0 is: "+populatePages(inputArr)[0].qty);
-console.log (impose(populatePages(inputArr), 24, false, [] ));
 
-console.log(240%12);
+console.log("imposeTest is: "+imposeTest(populatePages(inputArr),24,false));
