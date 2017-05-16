@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Imposition Assistant</title>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Khula:300,400" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css" type="text/css">
   </head>
   <div class="container">
@@ -21,16 +21,19 @@
         <label for="duplex"> Duplex? </label>
         <input type="checkbox" name="duplex" id="duplex-box"> 
         <label for="input-area">Input</label>
-        <textarea cols="60" rows="10" id="input-area"></textarea>
-        <button type="button" id="clear-input">Clear Input </button>
+        <textarea cols="60" rows="10" id="input-area" placeholder="Please enter a list of quantities to impose, one per line."></textarea>
+        <button type="button" class="btn-caution" id="clear-input">Clear Input </button>
       </form>
 
       <form id="output">
         <label for="output-area">Output</label>
         <textarea disabled cols="60" rows="10" id="output-area"></textarea>
-        <button type="button" id="clear-output">Clear output </button>
-        <button type="button" id="calculate"> Calculate Shuffle Rules </button> 
+        <button type="button" class="btn-caution" id="clear-output">Clear Output </button>
+        <button type="button" class="btn-primary" id="calculate"> Calculate Shuffle Rules </button> 
       </form>
+  </div>
+    <div class="footer flex-row">
+    <p class="footer-text flex-row"> © 2017 Central Coast Printing</p>
   </div>
   </div>
   <footer>
